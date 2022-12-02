@@ -1,7 +1,7 @@
 from scipy import ndimage
 import numpy as np
-import matplotlib
-import matplotlib.pyplot as plt
+import os.path
+import time
 
 from skimage import data, transform, io
 from skimage.util import img_as_ubyte
@@ -9,21 +9,21 @@ from skimage.morphology import disk,rectangle,square, binary_opening, binary_clo
 from skimage.filters import rank
 from skimage.color import rgb2gray
 from skimage.draw import rectangle,polygon_perimeter,line,disk,polygon
-import os.path
-import time
 from skimage import measure, segmentation
 from skimage.transform import probabilistic_hough_line, hough_line, hough_line_peaks
 from skimage.measure import LineModelND, ransac
-from matplotlib import cm
 from skimage.feature import peak_local_max
-from scipy import ndimage as ndi
-from scipy.signal import argrelextrema
 from skimage.filters import try_all_threshold
 from skimage.color import rgb2hsv
 from sklearn.decomposition import PCA
+from scipy import ndimage as ndi
+from scipy.signal import argrelextrema
+
 import math
 
 from matplotlib import cm
+import matplotlib
+import matplotlib.pyplot as plt
 
 from scipy import ndimage as ndi
 from scipy.signal import argrelextrema
@@ -32,14 +32,15 @@ from scipy.stats import linregress
 
 from shapely.geometry import LineString
 from shapely.affinity import scale
-
 import warnings
 from shapely.errors import ShapelyDeprecationWarning
+
 from pyproj import Proj, transform, CRS
 import rasterio
 import datetime
 import copy
 import sknw
+
 
 def apply_morphological_operations(image):
 	# Apply morphological operations
@@ -570,7 +571,7 @@ def generate_topological_map(toponodes_map,tmap_name,template_toponode,template_
 	topomap["transformation"]["parent"] = "map"
 	topomap["nodes"] = []
 
-	for c in range(0,len(toponodes_map["corridors"])):
+	for c in range(0,len(toponodes_map["corridor_nodes"])):
 		num = 0
 		for p in range(0,8,2):
 			node = copy.deepcopy(template_toponode)
@@ -578,8 +579,8 @@ def generate_topological_map(toponodes_map,tmap_name,template_toponode,template_
 			node["meta"]["pointset"] = tmap_name
 			node["meta"]["node"] = "c"+str(c)+"_p"+str(num)
 			node["node"]["name"] = "c"+str(c)+"_p"+str(num)
-			node["node"]["pose"]["position"]["x"] = toponodes_map["corridors"][c][p] 
-			node["node"]["pose"]["position"]["y"] = toponodes_map["corridors"][c][p+1]
+			node["node"]["pose"]["position"]["x"] = toponodes_map["corridor_nodes"][c][p] 
+			node["node"]["pose"]["position"]["y"] = toponodes_map["corridor_nodes"][c][p+1]
 
 			if num == 0:
 				edge = copy.deepcopy(template_topoedge)
@@ -612,7 +613,7 @@ def generate_topological_map(toponodes_map,tmap_name,template_toponode,template_
 			num = num+1
 	
 	num = 0
-	for n in toponodes_map["navigation"]:
+	for n in toponodes_map["service_nodes"]:
 		node = copy.deepcopy(template_toponode)
 		node["meta"]["map"] = tmap_name 
 		node["meta"]["pointset"] = tmap_name
@@ -675,3 +676,5 @@ def create_topogrid(binary_image, grid_size):
 				nodes.append([r,c])
 	
 	return nodes
+
+

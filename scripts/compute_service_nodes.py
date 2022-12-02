@@ -15,7 +15,6 @@ sys.path.append(modules_dir)
 import aerial_topomapping as at
 
 
-
 parser = argparse.ArgumentParser(description='Compute the service nodes in the free space')
 parser.add_argument("--input_image", type=str,help="Input TIF Image",required=True)
 parser.add_argument("--labels", type=str,help="Labels array with per pixel classification",required=True)
