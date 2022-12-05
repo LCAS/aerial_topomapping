@@ -34,18 +34,23 @@ Installing and setting up the Conda environment:
   `conda config --set auto_activate_base false`
 
 ## Running the pipeline with the example data:
-1. All the scripts (except one - latter specified) must be run within the `atenv` evironment previously create.  To activate the conda `atenv` environment in a new terminal run:  
+1. All the scripts (except step 7) must be run within the `atenv` evironment previously create.  To activate the conda `atenv` environment in a new terminal run:  
 `conda activate atenv`
 1. Go the the scripts folder:  
 `cd <path_to_this_repo>/aerial_topomapping/scripts`
-1. Create a binary occupancy map from the provided pointcloud:
+1. Create a binary occupancy map from the provided pointcloud:  
 `python pointcloud_to_occupancymap.py --input_las_pointcloud ../data/KG_small/KG_small.las --resolution 0.1`
-1. Classify all the clusters in the occupancy map that belong to rows:
+1. Classify all the clusters in the occupancy map that belong to rows:  
 `python row_classification.py --input_image ../data/KG_small/KG_small.tif`
-1. Compute the nodes that will be placed in the corridor using the row lines:
+1. Compute the nodes that will be placed in the corridor using the row lines:  
 `python compute_row_nodes.py --input_image ../data/KG_small/KG_small.tif --labels ../data/KG_small/KG_small_labels.npy --image-resolution 0.1 --row_separation 2.7`
-1. Compute the nodes in the rest of the free space:  
+1. Compute the nodes in the rest of the free space:    
 `python compute_service_nodes.py --input_image ../data/KG_small/KG_small.tif --labels ../data/KG_small/KG_small_labels.npy --mask ../data/KG_small/KG_small_mask.npy`
 1. Convert the nodes from longitude latitude coordinates to map coordinates. This step is performed using the ROS navsat_transform node which is part of the robot_localisation package. This script must be run **outside!** of the conda environment to avoid possible incompatibilities with the ROS version that you have installed:  
-  7.1 Run the ROS node and param configuration with: `roslaunch <path_to_this_repo>/roslaunch/
-  7.2 
+  7.1 In one terminal run the ROS node and param configuration. The datum file defines the latitude and longitude that will be considered as the origin of the map coordinates.  
+  `roslaunch <path_to_this_repo>/roslaunch/navsat.launch`  
+  7.2 In another run the script:  
+  `python convert_lonlat_nodes_to_map_coordinate.py --nodes_lonlat_filename ../data/KG_small/KG_small_nodes_lonlat.json`
+1. Generate the topological map so it can be used with toponav:  
+`python generate_topomap.py --nodes_map_coord_filename ../data/KG_smal/KG_small_nodes_map.json --output_tmap_name KG_small_topomap`  
+1. At this point you should have a topological that can be used and visualised using the topological navigation repo (check https://github.com/LCAS/topological_navigation for more info)
