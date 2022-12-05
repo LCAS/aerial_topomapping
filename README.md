@@ -73,17 +73,17 @@ python compute_row_nodes.py --input_image ../data/KG_small/KG_small.tif --labels
 ```
 python compute_service_nodes.py --input_image ../data/KG_small/KG_small.tif --labels ../data/KG_small/KG_small_labels.npy --mask ../data/KG_small/KG_small_mask.npy
 ```
-**7.** Convert the nodes from longitude latitude coordinates to map coordinates. This step is performed using the ROS navsat_transform node which is part of the robot_localisation package. This script must be run **outside!** of the conda environment to avoid possible incompatibilities with the ROS version that you have installed:  
+**7.** (This script must be run **outside!** of the conda environment to avoid possible incompatibilities with the ROS version that you have installed) Convert the nodes from longitude latitude coordinates to map coordinates. This step is performed using the ROS navsat_transform node which is part of the robot_localisation package.  
 **7.1.** In one terminal run the ROS node and param configuration. The datum file defines the latitude and longitude that will be considered as the origin of the map coordinates.  
 ```
 roslaunch <path_to_this_repo>/roslaunch/navsat.launch
 ```
 **7.2.** In another run the script:  
 ```
-python convert_lonlat_nodes_to_map_coordinate.py --nodes_lonlat_filename ../data/KG_small/KG_small_nodes_lonlat.json
+python convert_lonlat_nodes_to_map_coordinates.py --nodes_lonlat_filename ../data/KG_small/KG_small_nodes_lonlat.json
 ```
 **8.** Generate the topological map so it can be used with toponav:  
 ```
-python generate_topomap.py --nodes_map_coord_filename ../data/KG_smal/KG_small_nodes_map.json --output_tmap_name KG_small_topomap
+python generate_topomap.py --nodes_map_coord_filename ../data/KG_small/KG_small_nodes_map.json --output_tmap_name KG_small_topomap
 ```
-**9.** At this point you should have a topological that can be used and visualised using the topological navigation repo.
+**9.** At this point you should have a topological map (.tmap2 extension) that can be used and visualised using the topological navigation repo.
