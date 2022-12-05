@@ -2,6 +2,6 @@
 <launch>
   <node pkg="robot_localization" type="navsat_transform_node" name="navsat_transform_node" clear_params="true">
     <param name="wait_for_datum" value="true"/>
-    <rosparam param="datum">[22.924530264820437,40.45214110412176,1.022411]</rosparam>
+    <rosparam param="datum">[22.924530264820437,40.45214110412176,0]</rosparam>
   </node>
 </launch>
