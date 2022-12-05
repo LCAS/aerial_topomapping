@@ -1,6 +1,7 @@
 # aerial_topomapping
 
-Generate topometric maps from aerial imagery
+Generate topometric maps from UAV imagery to be used with the topological navigation framework (https://github.com/LCAS/topological_navigation).
+The pipeline proposed in this repo uses a pointcloud as the starting input. However, the pointcloud can be obtained from multiple aerial images through photogrammetry using the opensource project called Open Drone Map. For more info, please check https://opendronemap.org/ as this step not included in this wiki.
 
 ## Repo structure
 - **scripts**: set of python callable scripts to run the multiple steps in the proposed pipeline. All the scripts can be called with the `--help` argument to show all the arguments available and their description. 
@@ -53,4 +54,4 @@ Installing and setting up the Conda environment:
   `python convert_lonlat_nodes_to_map_coordinate.py --nodes_lonlat_filename ../data/KG_small/KG_small_nodes_lonlat.json`
 1. Generate the topological map so it can be used with toponav:  
 `python generate_topomap.py --nodes_map_coord_filename ../data/KG_smal/KG_small_nodes_map.json --output_tmap_name KG_small_topomap`  
-1. At this point you should have a topological that can be used and visualised using the topological navigation repo (check https://github.com/LCAS/topological_navigation for more info)
+1. At this point you should have a topological that can be used and visualised using the topological navigation repo.
