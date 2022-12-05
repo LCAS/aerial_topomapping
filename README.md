@@ -61,22 +61,22 @@ cd <path_to_this_repo>/aerial_topomapping/scripts
 ```
 python pointcloud_to_occupancymap.py --input_las_pointcloud ../data/KG_small/KG_small.las --resolution 0.1
 ```
-![input image](https://github.com/LCAS/aerial_topomapping/blob/main/etc/input_pointcloud.png)  
+![input image](https://github.com/LCAS/aerial_topomapping/blob/main/etc/input_pointcloud.png?raw=true)  
 **4.** Classify all the clusters in the occupancy map that belong to rows:  
 ```
 python row_classification.py --input_image ../data/KG_small/KG_small.tif
 ```
-![output_classification](https://github.com/LCAS/aerial_topomapping/blob/main/etc/output_classification.png)  
+![output_classification](https://github.com/LCAS/aerial_topomapping/blob/main/etc/output_classification.png?raw=true)  
 **5.** Compute the nodes that will be placed in the corridor using the row lines:  
 ```
 python compute_row_nodes.py --input_image ../data/KG_small/KG_small.tif --labels ../data/KG_small/KG_small_labels.npy --image_resolution 0.1 --row_separation 2.7
 ```
-![corridor_nodes](https://github.com/LCAS/aerial_topomapping/blob/main/etc/corridor_nodes.png)  
+![corridor_nodes](https://github.com/LCAS/aerial_topomapping/blob/main/etc/corridor_nodes.png?raw=true)  
 **6.** Compute the nodes in the rest of the free space:    
 ```
 python compute_service_nodes.py --input_image ../data/KG_small/KG_small.tif --labels ../data/KG_small/KG_small_labels.npy --mask ../data/KG_small/KG_small_mask.npy
 ```
-![service_nodes](https://github.com/LCAS/aerial_topomapping/blob/main/etc/service_nodes_maskon.png)  
+![service_nodes](https://github.com/LCAS/aerial_topomapping/blob/main/etc/service_nodes_maskon.png?raw=true)  
 **7.** (This script must be run **outside!** of the conda environment to avoid possible incompatibilities with the ROS environment that you have installed) Convert the nodes from longitude latitude coordinates to map coordinates. This step is performed using the ROS navsat_transform node which is part of the robot_localisation package.  
 **7.1.** In one terminal run the ROS node and param configuration. The datum file defines the latitude and longitude that will be considered as the origin of the map coordinates.  
 ```
