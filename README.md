@@ -67,7 +67,7 @@ python row_classification.py --input_image ../data/KG_small/KG_small.tif
 ```
 **5.** Compute the nodes that will be placed in the corridor using the row lines:  
 ```
-python compute_row_nodes.py --input_image ../data/KG_small/KG_small.tif --labels ../data/KG_small/KG_small_labels.npy --image-resolution 0.1 --row_separation 2.7
+python compute_row_nodes.py --input_image ../data/KG_small/KG_small.tif --labels ../data/KG_small/KG_small_labels.npy --image_resolution 0.1 --row_separation 2.7
 ```
 **6.** Compute the nodes in the rest of the free space:    
 ```
