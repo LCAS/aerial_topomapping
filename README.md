@@ -1,7 +1,7 @@
 # aerial_topomapping
 
 Generate topometric maps from UAV imagery to be used with the topological navigation framework (https://github.com/LCAS/topological_navigation).
-The pipeline proposed in this repo uses a pointcloud as the starting input. However, the pointcloud can be obtained from multiple aerial images through photogrammetry using the opensource project called Open Drone Map. For more info, please check https://opendronemap.org/ as this step not included in this wiki.
+The pipeline proposed in this repo uses a pointcloud as the starting input. The pointcloud can be obtained from multiple aerial images through photogrammetry using the opensource project called Open Drone Map. For more info, please check https://opendronemap.org/ as this step not included in this wiki.
 
 ## Repo structure
 - **scripts**: set of python callable scripts to run the multiple steps in the proposed pipeline. All the scripts can be called with the `--help` argument to show all the arguments available and their description. 
