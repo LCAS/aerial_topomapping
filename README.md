@@ -43,7 +43,7 @@ Installing and setting up the Conda environment:
   conda activate atenv
   ```
 
-  Important Note: by default every time you open a new terminal now you will be in the conda base enviroment. In order to avoid this behaviour you can do:  
+  Important Note: by default every time you open now a new terminal, you will be in the conda base enviroment. In order to avoid this behaviour you can do:  
   ```
   conda config --set auto_activate_base false
   ```
